@@ -1,0 +1,37 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.container {
+    background-color: whitesmoke;
+    height: 1600px;
+}
+
+/*.main-panel {
+    height:1600px;
+    background-color: whitesmoke;
+}
+
+#content-panel {
+    display: inline-flex;
+}
+
+#left-list {
+    background-color: #00c4ff;
+}
+
+#category-frame {
+    border-color: #9c3328;
+}*/
+
+.articles-ul li a:hover a:active {
+    font-weight: bold;
+    text-decoration: none;
+    color: darkgray;
+}
+
+.articles-ul li a {
+    text-decoration: none;
+    color: grey;
+}

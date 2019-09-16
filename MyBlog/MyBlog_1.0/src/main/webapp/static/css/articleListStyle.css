@@ -1,0 +1,26 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+body {
+    /*background-image: url("https://w.wallhaven.cc/full/md/wallhaven-md2mxk.jpg");*/
+    /*background-color: antiquewhite;*/
+    /*background-color: #F5F8F9;*/
+    background-attachment: fixed;
+}
+
+.container {
+    background-color: whitesmoke;
+}
+
+.box {
+    width: 90%;
+    heigth: 1000px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+ul{
+    list-style-type: none;
+}

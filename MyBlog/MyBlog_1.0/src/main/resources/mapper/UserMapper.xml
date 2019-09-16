@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jchenry.myblog.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.jchenry.myblog.domain.User">
+    <constructor>
+      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_password" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_email" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.jchenry.myblog.domain.User">
+
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+
+  </select>
+  <select id="selectUser" resultMap="BaseResultMap">
+    select user_id,user_name,user_password,user_email
+    from user
+    where user_name=#{userName,jdbcType=VARCHAR} AND user_password=#{password,jdbcType=VARCHAR}
+  </select>
+
+</mapper>

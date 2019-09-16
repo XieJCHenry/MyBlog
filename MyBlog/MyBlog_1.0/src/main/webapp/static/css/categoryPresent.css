@@ -1,0 +1,9 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.container{
+    background-color: whitesmoke;
+    height: 1600px;
+}

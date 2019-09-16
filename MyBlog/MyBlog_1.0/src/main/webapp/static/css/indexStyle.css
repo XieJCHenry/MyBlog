@@ -1,0 +1,176 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+/*.container{*/
+/*    margin:0 auto;*/
+/*}*/
+body {
+    /*background-image: url("https://w.wallhaven.cc/full/md/wallhaven-md2mxk.jpg");*/
+    /*background-color: antiquewhite;*/
+    /*background-color: #F5F8F9;*/
+    background-attachment: fixed;
+}
+
+.container {
+    background-color: whitesmoke;
+}
+
+.box {
+    width: 90%;
+    heigth: 1000px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+/*.header {
+    width: 100%;
+    height: 70px;
+    margin: 0 auto;
+    padding-top: 1%;
+    background-color: white;
+}*/
+
+.content {
+    width: 100%;
+    heigth: 1000px;
+    margin: 0 auto;
+}
+
+.content-left {
+    width: 21%;
+    height: 1000px;
+    background-color: snow;
+    float: left;
+    margin-right: 1%;
+    padding: 1%;
+}
+
+.content-main {
+    width: 56%;
+    height: 3600px;
+    /*background-color: white;*/
+    position: relative;
+    float: left;
+    padding: 10px;
+}
+
+.content-right {
+    background-color: snow;
+    width: 21%;
+    height: 2000px;
+    position: relative;
+    float: right;
+    margin-left: 1%;
+    padding: 1%;
+}
+
+.personal-info img {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    margin-bottom: 3%;
+    float: bottom;
+}
+
+.personal-info {
+    width: 120px;
+    height: 120px;
+    top: 10px;
+    left: 0%;
+    /*background-image: url(../../resource/image/avatar2.jpg);*/
+    display: block;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.useful-website {
+    width: 100%;
+    height: 44%;
+    background-color: white;
+    /*float:bottom;*/
+}
+
+.article-card {
+    width: 100%;
+    height: 400px;
+    text-align: left;
+    border-style: revert;
+    background-color: white;
+    position: center;
+    padding: 10px;
+}
+
+.article-header {
+    margin-left: 20px;
+    margin-top: 22px;
+    font-size: 36px;
+}
+
+.article-info {
+    display: inline-flex;
+    margin-left: 20px;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.article-summary {
+    margin: 10px 20px 20px 20px; /*上 右 下 左*/
+    font-size: 16px;
+    line-height: 32px;
+}
+
+/*.article-card footer {
+    margin-left: 20px;
+    !*margin-top: 6%;
+    margin-bottom: 10px;*!
+    width: 95%;
+    height: 20px;
+    !*background-color: #00c4ff;*!
+    display: inline-flex; !*水平排列*!
+    position: absolute;
+}*/
+
+.article-footer{
+    margin-left: 20px;
+    margin-top: 6%;
+    width:95%;
+    height: 20px;
+    position: absolute;
+}
+
+#to-top-btn{
+    background-color: unset;
+    border: none;
+    margin-top:600px;
+    margin-left: 1200px;
+    outline: none;
+    position: fixed;
+}
+
+.article-tag {
+    margin-top: 20px;
+    position: relative;
+}
+
+.read-all {
+    margin-top: 20px;
+    margin-left: 86%;
+    position: relative;
+}
+
+.articles-list {
+    list-style-type: none;
+}
+
+.footer {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    font-size: 10px;
+    /*color: blue;*/
+    background-color: whitesmoke;
+}

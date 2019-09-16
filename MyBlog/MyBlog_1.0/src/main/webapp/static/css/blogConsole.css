@@ -1,0 +1,24 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-attachment: fixed;
+}
+
+.container {
+    background-color: whitesmoke;
+    height: 860px;
+}
+
+#base-container {
+    height: 800px;
+}
+
+#main-panel {
+    margin-top: 20px;
+    height: 800px;
+    background-color: white;
+}
+

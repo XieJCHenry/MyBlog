@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jchenry.myblog.mapper.ArticleMapper">
+    <resultMap id="BaseResultMap" type="com.jchenry.myblog.domain.Article">
+        <constructor>
+            <idArg column="article_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="article_author" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="original_author" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="article_title" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="article_summary" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="publish_date" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="update_date" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="article_like" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <!--      <arg column="article_content" javaType="java.lang.String" jdbcType="LONGVARCHAR" />-->
+        </constructor>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from article,article_content,article_type,article_tag
+        where article_id = #{articleId,jdbcType=INTEGER};
+
+        update articletype set article_num = article_num - 1
+        where type_id in
+        <foreach collection="types" separator="," open="(" close=")" item="typeId" index="i">
+            #{typeId,jdbcType=INTEGER}
+        </foreach>;
+
+        update articletag set article_num = article_num - 1
+        where tag_id in
+        <foreach collection="tags" separator="," open="(" close=")" item="tagId" index="i">
+            #{tagId,jdbcType=INTEGER}
+        </foreach>;
+    </delete>
+    <insert id="insert">
+        insert into article (article_id, article_author, original_author,
+        article_title, article_summary, publish_date,
+        update_date, article_like)
+        values (
+        #{article.articleId,jdbcType=INTEGER},
+        #{article.articleAuthor,jdbcType=VARCHAR},
+        #{article.originalAuthor,jdbcType=VARCHAR},
+        #{article.articleTitle,jdbcType=VARCHAR},
+        #{article.articleSummary,jdbcType=VARCHAR},
+        #{article.publishDate,jdbcType=TIMESTAMP},
+        #{article.updateDate,jdbcType=TIMESTAMP},
+        #{article.articleLike,jdbcType=INTEGER}
+        );
+
+        insert into
+        article_content (article_id,art_title,art_content,art_html)
+        values(
+        #{article.articleId,jdbcType=BIGINT},
+        #{article.articleTitle,jdbcType=VARCHAR},
+        #{article.articleContent,jdbcType=LONGVARCHAR},
+        #{article.articleHtmlContent,jdbcType=LONGVARCHAR}
+        );
+
+        <foreach collection="types" item="typeId" index="i">
+            insert into article_type (article_id,type_id)
+            values (#{article.articleId,jdbcType=BIGINT}, #{typeId,jdbcType=INTEGER});
+        </foreach>
+
+
+        <foreach collection="tags" item="tagId" index="i">
+            insert into article_tag (article_id,tag_id)
+            values (#{article.articleId,jdbcType=BIGINT},#{tagId,jdbcType=INTEGER});
+        </foreach>
+
+        update articletype set article_num = article_num + 1
+        where type_id in
+        <foreach collection="types" separator="," open="(" close=")" item="typeId" index="i">
+            #{typeId,jdbcType=INTEGER}
+        </foreach>;
+
+        update articletag set article_num = article_num + 1
+        where tag_id in
+        <foreach collection="tags" separator="," open="(" close=")" item="tagId" index="i">
+            #{tagId,jdbcType=INTEGER}
+        </foreach>;
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.jchenry.myblog.domain.Article">
+    update article
+    set article_author = #{articleAuthor,jdbcType=VARCHAR},
+      original_author = #{originalAuthor,jdbcType=VARCHAR},
+      article_title = #{articleTitle,jdbcType=VARCHAR},
+      article_summary = #{articleSummary,jdbcType=VARCHAR},
+      publish_date = #{publishDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      article_like = #{articleLike,jdbcType=INTEGER},
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select article_id, article_author, original_author, article_title, article_summary, 
+    publish_date, update_date, article_like
+    from article
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </select>
+    <select id="selectByArticleTitle" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select article_id, article_author, original_author, article_title, article_summary,
+    publish_date, update_date, article_like
+    from article
+    where article_title = #{articleTitle,jdbcType=VARCHAR}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select article_id, article_author, original_author, article_title, article_summary, 
+    publish_date, update_date, article_like
+    from article
+  </select>
+    <select id="selectArticleTitle" parameterType="java.lang.String" resultType="java.lang.String">
+    select article_title from article where article_title = #{title,jdbcType=VARCHAR}
+  </select>
+
+    <select id="selectPrevious" parameterType="java.lang.Long" resultType="java.lang.String">
+        select article_title from article where article_id &lt; #{articleId,jdbcType=BIGINT} limit 1
+    </select>
+
+    <select id="selectNext" parameterType="java.lang.Long" resultType="java.lang.String">
+        select article_title from article where article_id &gt; #{articleId,jdbcType=BIGINT} limit 1
+    </select>
+
+    <select id="selectContentByPrimaryKey" parameterType="java.lang.Long" resultType="java.lang.String">
+    select art_content from article_content where article_id = #{articleId,jdbcType=BIGINT}
+  </select>
+
+    <select id = "selectHtmlContentByPrimaryKey" parameterType="java.lang.Long"
+            resultType="java.lang.String">
+        select art_html from article_content where article_id = #{articleId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectContentByTitle" parameterType="java.lang.String" resultType="java.lang.String">
+        select art_content from article_content where art_title = #{title,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectHtmlContentByTitle" parameterType="java.lang.String" resultType="java.lang.String">
+        select art_html from article_content where art_title = #{title,jdbcType=VARCHAR}
+    </select>
+</mapper>

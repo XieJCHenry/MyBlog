@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 引入jdbc连接参数 -->
+    <properties resource="jdbc.properties"/>
+
+    <!-- 指定mysql驱动包的路径，这里使用绝对路径 -->
+    <classPathEntry
+            location="D:\Software\maven\repository\mysql\mysql-connector-java\8.0.15\mysql-connector-java-8.0.15.jar"/>
+    <!-- MyBatis3Simple指定了不生成Example相关内容，如果要生成则去掉Simple -->
+    <context id="DB2Tables" targetRuntime="MyBatis3Simple">
+
+        <!-- 抑制自动生成的代码中的注释 -->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!-- 加载jdbc驱动信息 -->
+        <jdbcConnection driverClass="${jdbc.driver}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.username}"
+                        password="${jdbc.password}">
+        </jdbcConnection>
+
+        <!-- JavaBean类型解析 -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--
+            指定JavaBean生成的位置
+                targetPackage: JavaBean生成在哪个包下
+                targetProject: JavaBean生成在工程哪个位置下 .\代表当前工程
+         -->
+        <javaModelGenerator targetPackage="com.jchenry.myblog.domain"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="constructorBased" value="true"/>
+            <property name="trimStrings" value="true"/>
+            <property name="immutable" value="false"/>
+        </javaModelGenerator>
+
+        <!--
+            指定Sql映射文件生成的位置
+                targetPackage: mapper.xml生成在哪个包下
+                targetProject: mapper.xml生成在工程哪个位置下 .\代表当前工程
+        -->
+        <sqlMapGenerator targetPackage="mapper"
+                         targetProject="src/main/resources">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!--
+            指定dao接口生成的位置，也就是mapper接口
+                targetPackage: mapper接口生成在哪个包下
+                targetProject: mapper接口生成在工程哪个位置下 .\代表当前工程
+        -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.jchenry.myblog.mapper"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--
+            指定每个表的生成策略
+                将指定表生成指定的JavaBean类，并且声明不生成Example类
+         -->
+<!--        <table tableName="article" domainObjectName="Article"/>-->
+<!--        <table tableName="articletype" domainObjectName="ArticleType"/>-->
+<!--        <table tableName="articletag" domainObjectName="ArticleTag"/>-->
+            <table tableName="user" domainObjectName="User"/>
+    </context>
+</generatorConfiguration>
